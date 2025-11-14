@@ -11,6 +11,7 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
+// metadata is used by Next.js to populate the <head> tag
 
 export const metadata: Metadata = {
   title: "Create Next App",
