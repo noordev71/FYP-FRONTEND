@@ -4,7 +4,6 @@ import { useRouter } from "next/navigation";
 
 import useSettings from "@/hooks/settings/useSettings";
 import { usePathname } from "next/navigation";
-import useStripe from "@/hooks/stripe/useStripe";
 
 const AuthContext = createContext();
 

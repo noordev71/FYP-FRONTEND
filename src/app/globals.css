@@ -3,24 +3,22 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+
+  /* your custom colors */
+  --color-primary: #e6f85e;
+  --color-primary-dark: #0C630C;
+  --color-dark: #11121C;
+  --color-blue: #171825;
+  --color-border: #2e2f45;
+  --color-lightGray: #bdbfd4;
 }
 
+/* map them to tailwind tokens */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  --color-primary: var(--color-primary);
+  --color-primary-dark: var(--color-primary-dark);
+  --color-dark: var(--color-dark);
+  --color-blue: var(--color-blue);
+  --color-borderColor: var(--color-border);
+  --color-lightGray: var(--color-lightGray);
 }

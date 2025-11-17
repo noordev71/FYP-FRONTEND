@@ -1,10 +1,9 @@
-
 "use client";
 
 import React, { useEffect } from "react";
 import Link from "next/link";
 import { ToastContainer } from "react-toastify";
-import logo from "@/assets/images/logo.png";
+import logo from "@/assets/images/authPage.png";
 import Image from "next/image";
 import { PrimaryButton } from "@/components/Button/PrimaryButton";
 import TextInput from "@/components/Utilities/TextInput";
@@ -45,7 +44,7 @@ export default function Page() {
   return (
     <div className="grid grid-cols-12 gap-4 text-white p-10 container mx-auto mt-12">
       <div className="hidden md:flex col-span-12 md:col-span-6 p-5 md:p-20 flex-col bg-blue rounded-lg border border-borderColor max-h-fit ">
-        <h1 className="text-4xl text-center font-semibold mb-10 ">
+        <h1 className="text-primary text-4xl text-center font-semibold mb-10 ">
           Unlock the Power of <span className="text-primary">GenAI</span>{" "}
           Copywriting Tool
         </h1>

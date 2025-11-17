@@ -45,14 +45,6 @@ export const useLogin = () => {
           path: "/",
           domain: process.env.STORE_COOKIE_URL,
         });
-        cookie.set("profile_picture", result.profile_picture, {
-          path: "/",
-          domain: process.env.STORE_COOKIE_URL,
-        });
-        cookie.set("total_credits", result.total_credits, {
-          path: "/",
-          domain: process.env.STORE_COOKIE_URL,
-        });
         setTimeout(() => {
           router.push("/");
         }, 2000);
