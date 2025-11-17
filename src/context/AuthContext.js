@@ -12,13 +12,7 @@ export const useAuthContext = () => useContext(AuthContext);
 export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [userIsValid, setUserIsValid] = useState(null);
-  const [totalCredits, setTotalCredits] = useState(null);
-  const [usedCredits, setUsedCredits] = useState(null);
-  const [overallCredits, setOverallCredits] = useState(null);
-  const [isExpired, setIsExpired] = useState(false);
-  const [isPremium, setIsPremium] = useState(false);
-  const [isFreeTrial, setIsFreeTrial] = useState(null);
-  const [isSubscribed, setIsSubscribed] = useState(null);
+
   const [name, setName] = useState();
   const [isGuest, setIsGuest] = useState(false);
 
@@ -26,19 +20,6 @@ export const AuthProvider = ({ children }) => {
 
   const router = useRouter();
   const { checkIfUserValidated } = useSettings();
-
-  const cutTotalCreditsHandler = (creditsToCut) => {
-    if (creditsToCut > totalCredits) {
-      console.error("Insufficient credits");
-    } else {
-      const totalRemainingCredits = Number(totalCredits - creditsToCut).toFixed(
-        1
-      );
-      const creditsUsed = Number(usedCredits + creditsToCut).toFixed(1);
-      setTotalCredits(totalRemainingCredits);
-      setUsedCredits(creditsUsed);
-    }
-  };
 
   const validateToken = async () => {
     try {
@@ -49,15 +30,8 @@ export const AuthProvider = ({ children }) => {
           return;
         }
         setUserIsValid(result.valid);
-        setTotalCredits(Number(result.total_credits));
-        setUsedCredits(Number(result.total_credits_used));
-        setOverallCredits(Number(result.overall_total_credits));
-        setIsExpired(result.is_expired);
-        setLoading(false);
-        setIsPremium(result.is_paying);
-        // setIsFreeTrial(result.is_free_trial);
+        setLoading(false); // setIsFreeTrial(result.is_free_trial);
         setName(result.name);
-        setIsSubscribed(result.is_subscribed);
         setIsGuest(false);
       } else {
         return false;
@@ -84,17 +58,8 @@ export const AuthProvider = ({ children }) => {
       value={{
         user: userIsValid,
         loading,
-        totalCredits,
-        usedCredits,
-        isExpired,
-        setIsExpired,
-        overallCredits,
-        isPremium,
-        // isFreeTrial,
         name,
-        isSubscribed,
         isGuest,
-        cutTotalCreditsHandler,
         validateToken,
       }}
     >

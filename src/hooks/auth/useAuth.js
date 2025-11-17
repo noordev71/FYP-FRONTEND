@@ -42,10 +42,6 @@ const useAuth = () => {
       path: "/",
       domain: process.env.STORE_COOKIE_URL,
     });
-    cookie.remove("total_credits", {
-      path: "/",
-      domain: process.env.STORE_COOKIE_URL,
-    });
 
     const isTokenRemoved = cookie.get("token");
 
