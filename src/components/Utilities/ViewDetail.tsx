@@ -1,0 +1,207 @@
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+
+import TextEditor from "./TextEditor";
+import Loader from "../Loader/Loader";
+import TextInput from "./TextInput";
+import { PrimaryButton } from "../Button/PrimaryButton";
+
+interface ViewDetailProps {
+  getAdDetails: Function;
+  backTo: string;
+  title: string;
+  featureName: string;
+  dateCreated: string;
+  response: string;
+  adId: any;
+  updateResponse: Function;
+  visibility: string;
+  canEdit: boolean;
+  visibilityHandler: Function;
+  visibilityLoader: boolean;
+  isCustomDoc?: boolean;
+  changeTitleHandler?: Function;
+}
+
+const ViewDetail: React.FC<ViewDetailProps> = ({
+  getAdDetails,
+  backTo,
+  title,
+  featureName,
+  dateCreated,
+  response,
+  adId,
+  updateResponse,
+  visibility,
+  canEdit,
+  visibilityHandler,
+  visibilityLoader,
+  isCustomDoc = false,
+  changeTitleHandler,
+}) => {
+  const [isResponseUpdated, setIsResponseUpdated] = useState(false);
+
+  useEffect(() => {
+    getAdDetails(adId);
+  }, [isResponseUpdated, visibilityLoader]);
+
+  const responseUpdatedHandler = () => {
+    setIsResponseUpdated((state) => !state);
+  };
+
+  const titleUpdatedHandler = async (event: any) => {
+    event.preventDefault();
+    if (changeTitleHandler) {
+      const response = await changeTitleHandler(adId, event.target.title.value);
+    }
+  };
+
+  const copyLink = async () => {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      toast.success("Link copied to clipboard");
+    } catch (err) {
+      console.error("Failed to copy: ", err);
+      toast.error("Failed to copy link");
+    }
+  };
+  return (
+    <div className="max-w-[85rem] px-4 sm:px-6 lg:px-8 mx-auto">
+      <div className="grid lg:grid-cols-8 gap-y-8 lg:gap-y-0 lg:gap-x-6">
+        <div className="lg:col-span-8">
+          <div className="py-8 lg:pe-8">
+            <div className="space-y-5 lg:space-y-8">
+              <Link
+                className="inline-flex items-center gap-x-1.5 text-sm text-gray-600 decoration-2 hover:underline dark:text-blue-500"
+                href={`/${backTo}`}
+              >
+                <svg
+                  className="flex-shrink-0 size-4"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="m15 18-6-6 6-6" />
+                </svg>
+                Back to Ads
+              </Link>
+              <div className="flex items-center gap-x-2">
+                {/* <div className="w-2 h-full bg-gray-500" /> */}
+                <div className="flex justify-between items-center gap-x-5">
+                  {/* <h6 className="text-sm font-bold text-gray-500 w-[150px]">
+                    Type : {featureName}
+                  </h6> */}
+                  <h6 className="text-sm font-bold text-gray-500 w-fit">
+                    Date : {dateCreated}
+                  </h6>
+                  <div className="w-[1px] h-5 bg-gray-500"></div>
+                  <h6 className="text-sm font-bold text-gray-500 w-fit">
+                    Reading time : {dateCreated}
+                  </h6>
+                </div>
+              </div>
+
+              {!isCustomDoc && (
+                <h2 className="font-bold text-xl">Title: {title}</h2>
+              )}
+
+              {visibilityLoader ? (
+                <Loader />
+              ) : (
+                <div className="w-fit ml-auto">
+                  <p className="font-bold text-xl">
+                    Share the Links directly with others.
+                  </p>
+                  <div className="flex gap-x-4 my-2 w-fit ml-auto">
+                    <button
+                      className={`w-fit p-3 transition-all rounded-lg duration-200 ${
+                        visibility === "Private"
+                          ? "bg-primary text-black"
+                          : "bg-blue"
+                      }`}
+                      disabled={visibilityLoader}
+                      onClick={() => {
+                        visibilityHandler("Private", adId);
+                        copyLink();
+                      }}
+                    >
+                      Private
+                    </button>
+                    <button
+                      className={`w-fit p-3 transition-all rounded-lg duration-200 ${
+                        visibility === "Public"
+                          ? "bg-primary text-black"
+                          : "bg-blue"
+                      }`}
+                      disabled={visibilityLoader}
+                      onClick={() => {
+                        visibilityHandler("Public", adId);
+                        copyLink();
+                      }}
+                    >
+                      Public
+                    </button>
+                  </div>
+                  <p
+                    className="hover:cursor-pointer font-bold text-primary text-right"
+                    onClick={copyLink}
+                  >
+                    Copy Link
+                  </p>
+                </div>
+              )}
+            </div>
+            {isCustomDoc && (
+              <form
+                className="max-w-[400px] flex flex-col gap-y-4"
+                onSubmit={titleUpdatedHandler}
+              >
+                <div>
+                  <TextInput
+                    name="title"
+                    placeholder="Enter document title"
+                    type="text"
+                    isInputPrimary={false}
+                    label="Title"
+                    initialValue={title}
+                    canEdit={canEdit}
+                  />
+                </div>
+                <div className="w-fit">
+                  <PrimaryButton type="submit">Save</PrimaryButton>
+                </div>
+              </form>
+            )}
+          </div>
+        </div>
+
+        <div className={`col-span-8`}>
+          <div
+            className={`${
+              isCustomDoc ? "max-w-[1240px] min-h-fit h-[1755px]" : "w-full"
+            }`}
+          >
+            {(response || isCustomDoc) && (
+              <TextEditor
+                value={response}
+                onSubmit={updateResponse}
+                adId={adId}
+                responseUpdatedHandler={responseUpdatedHandler}
+                canEdit={canEdit}
+              />
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default ViewDetail;

@@ -36,9 +36,9 @@ export default function Page() {
         router.push("/");
       }
     };
-    if (cookie.get("token")) {
-      validateUser();
-    }
+    // if (cookie.get("token")) {
+    //   validateUser();
+    // }
   });
 
   return (

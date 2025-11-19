@@ -167,7 +167,7 @@ const Dashboard = () => {
         </div>
         <div className="col-span-12 md:col-span-6 flex flex-col">
           <h3 className="text-4xl font-medium mb-5">Our news letter</h3>
-          <div className="flex flex-col gap-y-3 w-full gap-y-8">
+          {/* <div className="flex flex-col gap-y-3 w-full gap-y-8">
             {false ? (
               <Loader />
             ) : (
@@ -184,7 +184,7 @@ const Dashboard = () => {
                 );
               })
             )}
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
