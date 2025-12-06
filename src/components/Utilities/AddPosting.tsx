@@ -170,16 +170,19 @@ const AddPosting: React.FC<AddPostingProps> = ({
           ></p>
           {loadingAnimation && <Loader />}
 
-          {responseRef.current && responseRef.current?.innerText !== "" && (
-            <div className="w-full">
-              <TextEditor
-                value={responseRef.current.innerText}
-                onSubmit={updateResponse}
-                adId={recentGeneratedAdId}
-                canEdit={true}
-              />
-            </div>
-          )}
+          {isPostGenerated &&
+            !loadingAnimation &&
+            responseRef.current &&
+            responseRef.current?.innerHTML !== "" && (
+              <div className="w-full">
+                <TextEditor
+                  value={responseRef.current.innerHTML}
+                  onSubmit={updateResponse}
+                  adId={recentGeneratedAdId}
+                  canEdit={true}
+                />
+              </div>
+            )}
         </div>
       </div>
 

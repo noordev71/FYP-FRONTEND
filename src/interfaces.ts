@@ -15,4 +15,5 @@ export interface FacebookAd {
   date_created: string;
   visibility: string;
   can_edit: boolean;
+  image?: string;
 }

@@ -122,7 +122,7 @@ export const useFacebookAd = () => {
       if (responseObject.data && responseObject.data !== null) {
         myFinalGptResponse += responseObject.data;
 
-        textRef.current.innerText = myFinalGptResponse;
+        textRef.current.innerHTML = myFinalGptResponse;
       } else {
       }
     };
@@ -197,6 +197,10 @@ export const useFacebookAd = () => {
     if (response.data.is_authenticated) {
       authCtx.validateToken();
     }
+
+    if (!response.data.image)
+      response.data.image =
+        "https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&w=1200&q=80";
 
     setFacebookAdDetails(response.data);
   };

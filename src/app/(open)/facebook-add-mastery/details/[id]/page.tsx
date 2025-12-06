@@ -35,6 +35,7 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
           visibilityLoader={visibilityLoader}
           canEdit={facebookAdDetails?.can_edit || false}
           visibilityHandler={visibilityHandler}
+          image={facebookAdDetails?.image}
         />
       )}
     </Fragment>
