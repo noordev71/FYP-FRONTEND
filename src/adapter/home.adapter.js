@@ -10,7 +10,7 @@ export class HomeAdapter {
         Accept: "application/json",
         Authorization: `Bearer ${token}`,
       },
-      timeout: 15000,
+      timeout: 60000,
       timeoutErrorMessage: "Request timed out",
     });
   }
