@@ -31,7 +31,6 @@ export default function TextEditor(props: any) {
 
     convertAndSanitize(dataToSanitize);
   }, [props.value]);
-  console.log("INNER TEXT", initialValue);
 
   // const moveToolbar = () => {
   //   const selection = editorRef.current.selection.getRng();

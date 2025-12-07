@@ -46,7 +46,9 @@ const ViewDetail: React.FC<ViewDetailProps> = ({
 }) => {
   const [isResponseUpdated, setIsResponseUpdated] = useState(false);
 
-  const fallbackImage = image || "";
+  const fallbackImage = `${process.env.NEXT_PUBLIC_BASE_URL + image}` || "";
+
+  console.log("IMAGE IN VIEW DETAIL", image, fallbackImage);
   // const fallbackImage =
   //   image ||
   //   "https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&w=1200&q=80";

@@ -190,6 +190,7 @@ export const useFacebookAd = () => {
 
   const handleGetFacebookAdDetails = async (id: string) => {
     const response = await getDetail("facebook-ad", id);
+    console.log("DETAILS RESPONSE", response);
     if (response.error) {
       return;
     }
@@ -198,9 +199,9 @@ export const useFacebookAd = () => {
       authCtx.validateToken();
     }
 
-    if (!response.data.image)
-      response.data.image =
-        "https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&w=1200&q=80";
+    // if (!response.data.image)
+    //   response.data.image =
+    //     "https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&w=1200&q=80";
 
     setFacebookAdDetails(response.data);
   };
