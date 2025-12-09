@@ -223,7 +223,7 @@ const ViewDetail: React.FC<ViewDetailProps> = ({
                 <img
                   src={fallbackImage}
                   alt="Ad Image"
-                  className="w-full h-[350px] object-cover rounded-lg shadow-lg"
+                  className="w-full h-auto object-contain rounded-lg shadow-lg"
                 />
 
                 {/* DOWNLOAD BUTTON */}

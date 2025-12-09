@@ -2,16 +2,11 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+
+import { useFacebookAd } from "@/hooks/home/useFacebookAd";
 import Loader from "@/components/Loader/Loader";
 import NewsLetterItem from "@/components/Utilities/NewsLetterItem";
-
-// import { useFacebookAd } from "@/hooks/home/useFacebookAd";
-// import { useLinkedinAd } from "@/hooks/home/useLinkedinAd";
-// import useEmail from "@/hooks/home/useEmail";
-// import Loader from "@/components/Loader/Loader";
-// import AISystems from "@/components/HomePage/Sections/AISystems";
-// import NewsLetterItem from "@/components/Utilities/NewsLetterItem";
-// import usePublicBlog from "@/hooks/home/usePublicBlog";
+import AISystems from "@/components/HomePage/AISystems";
 
 const LatestFeatures = [
   { text: "Facebook", path: "/facebook-add-mastery/details" },
@@ -55,48 +50,48 @@ const NewsLetterItems = [
 const Dashboard = () => {
   const [selectedMode, setSelectedMode] = useState("Facebook");
 
-  // const { getAllFacebookPosts, isLoading: facebookAdsLoading } =
-  //   useFacebookAd();
-  // const { getAllLinkedinPosts, isLoading: linkedinAdsLoading } =
-  //   useLinkedinAd();
-  // const { getAllEmailData, isLoading: emailAdsLoading } = useEmail();
+  const { getAllFacebookPosts, isLoading: facebookAdsLoading } =
+    useFacebookAd();
 
-  // const { isLoading, getAllBlogs, allBlogs } = usePublicBlog();
+  const [currentAdsList, setCurrentAdsList] = useState<any>();
 
-  // const [currentAdsList, setCurrentAdsList] = useState<any>();
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await getAllFacebookPosts();
+      if (response) {
+        const allAds = response.flatMap((item: any) => item.facebook_data);
+        setCurrentAdsList(allAds.slice(0, 5));
+      }
+      // if (selectedMode === "Facebook") {
+      //   const response = await getAllFacebookPosts();
+      //   if (response) {
+      //     const allAds = response.flatMap((item: any) => item.facebook_data);
+      //     setCurrentAdsList(allAds.slice(0, 5));
+      //   }
+      // } else if (selectedMode === "Linkedin Posts") {
+      //   const response = await getAllLinkedinPosts();
+      //   if (response) {
+      //     const allAds = response.flatMap((item: any) => item.linkedin_data);
+      //     setCurrentAdsList(allAds.slice(0, 5));
+      //   }
+      // } else {
+      //   const response = await getAllEmailData();
+      //   if (response) {
+      //     const allAds = response.flatMap((item: any) => item.email_data);
+      //     setCurrentAdsList(allAds.slice(0, 5));
+      //   }
+      // }
+      // console.log("ADS", currentAdsList);
+    };
+    fetchData();
+  }, [selectedMode]);
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     if (selectedMode === "Facebook") {
-  //       const response = await getAllFacebookPosts();
-  //       if (response) {
-  //         const allAds = response.flatMap((item: any) => item.facebook_data);
-  //         setCurrentAdsList(allAds.slice(0, 5));
-  //       }
-  //     } else if (selectedMode === "Linkedin Posts") {
-  //       const response = await getAllLinkedinPosts();
-  //       if (response) {
-  //         const allAds = response.flatMap((item: any) => item.linkedin_data);
-  //         setCurrentAdsList(allAds.slice(0, 5));
-  //       }
-  //     } else {
-  //       const response = await getAllEmailData();
-  //       if (response) {
-  //         const allAds = response.flatMap((item: any) => item.email_data);
-  //         setCurrentAdsList(allAds.slice(0, 5));
-  //       }
-  //     }
-  //     // console.log("ADS", currentAdsList);
-  //   };
-  //   fetchData();
-  // }, [selectedMode]);
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     getAllBlogs();
-  //   };
-  //   fetchData();
-  // }, []);
+  useEffect(() => {
+    const fetchData = async () => {
+      // getAllBlogs();
+    };
+    fetchData();
+  }, []);
 
   const path = LatestFeatures.find(
     (feature) => feature.text === selectedMode
@@ -104,7 +99,9 @@ const Dashboard = () => {
 
   return (
     <div className="w-full gap-10 grid grid-cols-12 gap-y-10">
-      <div className="col-span-12">{/* <AISystems /> */}</div>
+      <div className="col-span-12">
+        <AISystems />
+      </div>
 
       <div className="col-span-12 grid grid-cols-12 gap-10">
         <div className="col-span-12 md:col-span-6">
@@ -131,7 +128,7 @@ const Dashboard = () => {
             </div>
           </div>
           <div className="flex flex-col my-5">
-            {/* {facebookAdsLoading || linkedinAdsLoading || emailAdsLoading ? (
+            {facebookAdsLoading ? (
               <Loader />
             ) : currentAdsList?.length === 0 ? (
               <span>No ads generated</span>
@@ -141,7 +138,7 @@ const Dashboard = () => {
                   <Link
                     key={item.id}
                     href={`${path}/${item.id}`}
-                    className="flex items-center text-sm justify-between py-2 border-b border-b-900 py-10"
+                    className="flex items-center text-sm py-2 border-b border-b-1 py-10"
                   >
                     <div className="flex items-center">
                       <div className="flex flex-col gap-y-5">
@@ -162,29 +159,25 @@ const Dashboard = () => {
                   </Link>
                 );
               })
-            )} */}
+            )}
           </div>
         </div>
         <div className="col-span-12 md:col-span-6 flex flex-col">
           <h3 className="text-4xl font-medium mb-5">Our news letter</h3>
-          {/* <div className="flex flex-col gap-y-3 w-full gap-y-8">
-            {false ? (
-              <Loader />
-            ) : (
-              NewsLetterItems?.map((item) => {
-                return (
-                  <NewsLetterItem
-                    key={item.name}
-                    id={item.name}
-                    name={item.title}
-                    postDate={item.postDate}
-                    title={item.title}
-                    description={item.description}
-                  />
-                );
-              })
-            )}
-          </div> */}
+          <div className="flex flex-col gap-y-3 w-full gap-y-8">
+            {NewsLetterItems?.map((item, index) => {
+              return (
+                <NewsLetterItem
+                  key={item.name + index}
+                  id={item.name}
+                  name={item.title}
+                  postDate={item.postDate}
+                  title={item.title}
+                  description={item.description}
+                />
+              );
+            })}
+          </div>
         </div>
       </div>
     </div>

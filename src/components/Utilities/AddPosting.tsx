@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 import { useRouter } from "next/navigation";
 
 import { PrimaryButton } from "../Button/PrimaryButton";
@@ -105,7 +105,7 @@ const AddPosting: React.FC<AddPostingProps> = ({
           <div className="flex gap-x-5 gap-y-3 justify-center flex-wrap w-fit bg-black px-2 py-4 rounded-lg items-center">
             {radioList.map((radio, index) => {
               return (
-                <>
+                <Fragment key={radio.value}>
                   <LockedRadio
                     key={radio.value}
                     value={radio.value}
@@ -125,7 +125,7 @@ const AddPosting: React.FC<AddPostingProps> = ({
                   {index + 1 < radioList.length && (
                     <div className="w-4 h-1 bg-gray-500 rounded-lg"></div>
                   )}
-                </>
+                </Fragment>
               );
             })}
           </div>

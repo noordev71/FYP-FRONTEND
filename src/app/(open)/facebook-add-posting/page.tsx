@@ -16,12 +16,12 @@ const FacebookRadios = [
   // { value: "The bullet digestion", isPremiumFeature: true, creditsCost: 5 },
   // { value: "The suspense builder", isPremiumFeature: true, creditsCost: 5 },
   // { value: "The FOMO factory", isPremiumFeature: true, creditsCost: 5 },
-  {
-    value: "ReviewBoost",
-    isPremiumFeature: true,
-    creditsCost: 5,
-    tones: ["ReviewBoost"],
-  },
+  // {
+  //   value: "ReviewBoost",
+  //   isPremiumFeature: true,
+  //   creditsCost: 5,
+  //   tones: ["ReviewBoost"],
+  // },
 ];
 
 const ReviewBoostFields = [
