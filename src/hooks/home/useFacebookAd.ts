@@ -78,13 +78,8 @@ export const useFacebookAd = () => {
   };
 
   const handleNewAddPost = async (event: any) => {
-    setIsLoading(true);
-    setLoadingAnimation(true);
-
-    const hidePremiumFeature = { ...premiumFeatureDetail };
-    hidePremiumFeature.display = false;
-    setPremiumFeatureDetail(hidePremiumFeature);
     event.preventDefault();
+
     let formData;
     if (selectedMode !== "ReviewBoost") {
       formData = {
@@ -104,6 +99,21 @@ export const useFacebookAd = () => {
         feature_name: event.target.tone.value,
       };
     }
+    if (
+      !formData.cta ||
+      !formData.ideal_market ||
+      !formData.ideal_market ||
+      !formData.service_or_product
+    ) {
+      toast("Please fill all the required fields", { type: "error" });
+      throw Error("Missing required fields");
+    }
+    setIsLoading(true);
+    setLoadingAnimation(true);
+
+    const hidePremiumFeature = { ...premiumFeatureDetail };
+    hidePremiumFeature.display = false;
+    setPremiumFeatureDetail(hidePremiumFeature);
 
     const response = await addNewPost("facebook-ad", formData);
     if (response.error) {

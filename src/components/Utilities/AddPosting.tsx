@@ -56,8 +56,13 @@ const AddPosting: React.FC<AddPostingProps> = ({
   const authCtx = useAuthContext();
 
   const formSubmitHandler = async (event: any) => {
-    setIsCollapsed(true);
-    await submitHandler(event);
+    try {
+      setIsCollapsed(true);
+      await submitHandler(event);
+    } catch (error) {
+      setIsCollapsed(false);
+      console.error("Error in form submission:", error);
+    }
   };
 
   const redirectToUpgradeHandler = () => {
