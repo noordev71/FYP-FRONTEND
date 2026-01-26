@@ -61,12 +61,12 @@ const sidebarItems = [
     id: "i5",
   },
 
-  // {
-  //   text: "Settings",
-  //   to: "/settings/profile",
-  //   icon: <FaCog className="w-full h-full" />,
-  //   id: "i6",
-  // },
+  {
+    text: "Settings",
+    to: "/settings/profile",
+    icon: <FaCog className="w-full h-full" />,
+    id: "i7",
+  },
 ];
 
 export default function SideNav() {
