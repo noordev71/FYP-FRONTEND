@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 
 import { useFacebookAd } from "@/hooks/home/useFacebookAd";
+import useEmail from "@/hooks/home/useEmail";
+import { useLinkedinAd } from "@/hooks/home/useLinkedinAd";
 import Loader from "@/components/Loader/Loader";
 import NewsLetterItem from "@/components/Utilities/NewsLetterItem";
 import AISystems from "@/components/HomePage/AISystems";
@@ -52,36 +54,39 @@ const Dashboard = () => {
 
   const { getAllFacebookPosts, isLoading: facebookAdsLoading } =
     useFacebookAd();
+  const { getAllLinkedinPosts, isLoading: linkedinAdsLoading } =
+    useLinkedinAd();
+  const { getAllEmailData, isLoading: emailAdsLoading } = useEmail();
 
   const [currentAdsList, setCurrentAdsList] = useState<any>();
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await getAllFacebookPosts();
-      if (response) {
-        const allAds = response.flatMap((item: any) => item.facebook_data);
-        setCurrentAdsList(allAds.slice(0, 5));
-      }
-      // if (selectedMode === "Facebook") {
-      //   const response = await getAllFacebookPosts();
-      //   if (response) {
-      //     const allAds = response.flatMap((item: any) => item.facebook_data);
-      //     setCurrentAdsList(allAds.slice(0, 5));
-      //   }
-      // } else if (selectedMode === "Linkedin Posts") {
-      //   const response = await getAllLinkedinPosts();
-      //   if (response) {
-      //     const allAds = response.flatMap((item: any) => item.linkedin_data);
-      //     setCurrentAdsList(allAds.slice(0, 5));
-      //   }
-      // } else {
-      //   const response = await getAllEmailData();
-      //   if (response) {
-      //     const allAds = response.flatMap((item: any) => item.email_data);
-      //     setCurrentAdsList(allAds.slice(0, 5));
-      //   }
+      // const response = await getAllFacebookPosts();
+      // if (response) {
+      //   const allAds = response.flatMap((item: any) => item.facebook_data);
+      //   setCurrentAdsList(allAds.slice(0, 5));
       // }
-      // console.log("ADS", currentAdsList);
+      if (selectedMode === "Facebook") {
+        const response = await getAllFacebookPosts();
+        if (response) {
+          const allAds = response.flatMap((item: any) => item.facebook_data);
+          setCurrentAdsList(allAds.slice(0, 5));
+        }
+      } else if (selectedMode === "Linkedin Posts") {
+        const response = await getAllLinkedinPosts();
+        if (response) {
+          const allAds = response.flatMap((item: any) => item.linkedin_data);
+          setCurrentAdsList(allAds.slice(0, 5));
+        }
+      } else {
+        const response = await getAllEmailData();
+        if (response) {
+          const allAds = response.flatMap((item: any) => item.email_data);
+          setCurrentAdsList(allAds.slice(0, 5));
+        }
+      }
+      console.log("ADS", currentAdsList);
     };
     fetchData();
   }, [selectedMode]);
@@ -94,7 +99,7 @@ const Dashboard = () => {
   }, []);
 
   const path = LatestFeatures.find(
-    (feature) => feature.text === selectedMode
+    (feature) => feature.text === selectedMode,
   )?.path;
 
   return (
@@ -128,7 +133,7 @@ const Dashboard = () => {
             </div>
           </div>
           <div className="flex flex-col my-5">
-            {facebookAdsLoading ? (
+            {facebookAdsLoading || linkedinAdsLoading || emailAdsLoading ? (
               <Loader />
             ) : currentAdsList?.length === 0 ? (
               <span>No ads generated</span>
@@ -146,8 +151,8 @@ const Dashboard = () => {
                           {item.title
                             ? item.title
                             : item.our_offering
-                            ? item.our_offering
-                            : item.service_or_product}
+                              ? item.our_offering
+                              : item.service_or_product}
                         </h3>
                         <p
                           className="line-clamp-3"

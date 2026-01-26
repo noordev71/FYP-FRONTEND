@@ -17,3 +17,49 @@ export interface FacebookAd {
   can_edit: boolean;
   image?: string;
 }
+
+export interface ArticleAd {
+  id: string;
+  title: string;
+  last_edit: string;
+  article_topic: string;
+  target_market: string;
+  seo_keywords: string;
+  research_material: string;
+  article_length: string;
+  feature_name: string;
+  response: string;
+  platform?: string;
+  date_created: string;
+  visibility: string;
+  can_edit: boolean;
+}
+
+export interface LinkedinAd {
+  id: string;
+  title: string;
+  last_edit: string;
+  feature_name: string;
+  response: string;
+  platform?: string;
+  date_created: string;
+  visibility: string;
+  can_edit: boolean;
+}
+
+export interface EmailAd {
+  id: string;
+  title: string;
+  last_edit: string;
+  feature_name: string;
+  date_created: string;
+  platform?: string;
+  to_pitch: string;
+  our_offering: string;
+  prospect_name: string;
+  prospect_company: string;
+  cta: string;
+  response: string;
+  visibility: string;
+  can_edit: boolean;
+}
