@@ -53,7 +53,7 @@ export default function Page() {
   return (
     <Fragment>
       <ViewAll
-        title="Facebook"
+        title="Products"
         getAllCards={getAllFacebookPosts}
         getAllStats={getAllFacebookStats}
         allAdsLoaded={allFacebookAdsLoaded}

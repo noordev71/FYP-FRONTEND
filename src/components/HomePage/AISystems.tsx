@@ -11,30 +11,14 @@ export default function AISystems() {
         </div> */}
 
         <RecentSystemCard
-          title="Blank Document"
-          platform="Document"
-          desc="Start writing a document"
-        />
-
-        <RecentSystemCard
           title="Linkedin"
           platform="Linkedin"
           desc='Grow your "personal brand" (and achieve increased engagement) through the power of LinkedIn posts!'
         />
         <RecentSystemCard
-          title="Facebook"
-          platform="Facebook"
-          desc="Write your next high converting copy for Facebook ads!"
-        />
-        <RecentSystemCard
-          title="Email"
-          platform="Email"
-          desc="Maximise the power of cold outreach through email scripts that yield better results."
-        />
-        <RecentSystemCard
-          title="Article"
-          platform="Article"
-          desc="Publish your next thought provoking write-up!"
+          title="Products"
+          platform="Products"
+          desc="Write your next high converting copy for Products ads!"
         />
       </div>
 

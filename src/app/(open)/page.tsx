@@ -11,9 +11,8 @@ import NewsLetterItem from "@/components/Utilities/NewsLetterItem";
 import AISystems from "@/components/HomePage/AISystems";
 
 const LatestFeatures = [
-  { text: "Facebook", path: "/facebook-add-mastery/details" },
+  { text: "Products", path: "/product-add-mastery/details" },
   { text: "Linkedin Posts", path: "/linkedin-add-mastery/details" },
-  { text: "Email", path: "/email-marketing/details" },
 ];
 
 const NewsLetterItems = [
@@ -67,7 +66,7 @@ const Dashboard = () => {
       //   const allAds = response.flatMap((item: any) => item.facebook_data);
       //   setCurrentAdsList(allAds.slice(0, 5));
       // }
-      if (selectedMode === "Facebook") {
+      if (selectedMode === "Products") {
         const response = await getAllFacebookPosts();
         if (response) {
           const allAds = response.flatMap((item: any) => item.facebook_data);
@@ -109,7 +108,7 @@ const Dashboard = () => {
       </div>
 
       <div className="col-span-12 grid grid-cols-12 gap-10">
-        <div className="col-span-12 md:col-span-6">
+        <div className="col-span-12">
           <h2 className="text-4xl font-medium mb-5">Latest generated cards</h2>
           <div className="flex py-3">
             <div className="flex gap-x-5">
@@ -167,7 +166,7 @@ const Dashboard = () => {
             )}
           </div>
         </div>
-        <div className="col-span-12 md:col-span-6 flex flex-col">
+        {/* <div className="col-span-12 md:col-span-6 flex flex-col">
           <h3 className="text-4xl font-medium mb-5">Our news letter</h3>
           <div className="flex flex-col gap-y-3 w-full gap-y-8">
             {NewsLetterItems?.map((item, index) => {
@@ -183,7 +182,7 @@ const Dashboard = () => {
               );
             })}
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

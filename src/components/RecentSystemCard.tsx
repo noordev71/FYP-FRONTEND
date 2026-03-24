@@ -1,5 +1,5 @@
 import { SlSocialLinkedin } from "react-icons/sl";
-import { FiFacebook } from "react-icons/fi";
+import { FaBox } from "react-icons/fa";
 import { PiArticle } from "react-icons/pi";
 import { MdEmail } from "react-icons/md";
 import { PrimaryButton } from "./Button/PrimaryButton";
@@ -17,8 +17,8 @@ const RecentSystemCard: React.FC<RecentSystemCardProps> = ({
   return (
     <div className="rounded-lg border border-primary p-6 shadow-sm flex flex-col justify-between gap-y-3  h-full">
       <div className="flex flex-row gap-x-1 items-center">
-        {platform === "Facebook" ? (
-          <FiFacebook className="size-6 text-primary" />
+        {platform === "Products" ? (
+          <FaBox className="size-6 text-primary" />
         ) : platform === "Linkedin" ? (
           <SlSocialLinkedin className="size-6 text-primary" />
         ) : platform === "Article" ? (
@@ -35,12 +35,12 @@ const RecentSystemCard: React.FC<RecentSystemCardProps> = ({
             platform === "Facebook"
               ? "/facebook-add-posting"
               : platform === "Linkedin"
-              ? "/linkedin-add-posting"
-              : platform === "Email"
-              ? "/email-marketing-add-posting"
-              : platform === "Article"
-              ? "/article-add-posting"
-              : ""
+                ? "/linkedin-add-posting"
+                : platform === "Email"
+                  ? "/email-marketing-add-posting"
+                  : platform === "Article"
+                    ? "/article-add-posting"
+                    : ""
           }
         >
           <PrimaryButton>Use System</PrimaryButton>

@@ -3,8 +3,8 @@
 import React, { useState, Fragment } from "react";
 import {
   FaHome,
-  FaFacebookF,
-  FaLinkedinIn,
+  FaBox,
+  FaServicestack,
   FaEnvelope,
   FaCog,
   FaSignOutAlt,
@@ -31,34 +31,16 @@ const sidebarItems = [
     id: "i1",
   },
   {
-    text: "Document",
-    to: "/custom-doc",
-    icon: <BsFiletypeDoc className="w-full h-full" />,
-    id: "i6",
-  },
-  {
-    text: "Facebook",
-    to: "/facebook-add-mastery",
-    icon: <FaFacebookF className="w-full h-full" />,
+    text: "Product",
+    to: "/product-add-mastery",
+    icon: <FaBox className="w-full h-full" />,
     id: "i2",
   },
   {
-    text: "LinkedIn",
+    text: "Service",
     to: "/linkedin-add-mastery",
-    icon: <FaLinkedinIn className="w-full h-full" />,
+    icon: <FaServicestack className="w-full h-full" />,
     id: "i3",
-  },
-  {
-    text: "Email",
-    to: "/email-marketing",
-    icon: <FaEnvelope className="w-full h-full" />,
-    id: "i4",
-  },
-  {
-    text: "Article",
-    to: "/article-add-mastery",
-    icon: <FaFileAlt className="w-full h-full" />,
-    id: "i5",
   },
 
   {
