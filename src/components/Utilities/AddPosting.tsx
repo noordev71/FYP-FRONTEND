@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { PrimaryButton } from "../Button/PrimaryButton";
 import Modal from "@/components/Utilities/Modal";
 import { FaBolt } from "react-icons/fa";
+import { FaEye } from "react-icons/fa";
 import { useAuthContext } from "@/context/AuthContext";
 import LockedRadio from "../FacebookAdPosting/LockedRadio";
 import StatusBar from "./StatusBar";
@@ -67,6 +68,12 @@ const AddPosting: React.FC<AddPostingProps> = ({
 
   const redirectToUpgradeHandler = () => {
     router.push("/settings/profile");
+  };
+
+  const handleViewDetail = () => {
+    const detailRoute = `/product-add-mastery/details/${recentGeneratedAdId}`;
+
+    router.push(detailRoute);
   };
 
   return (
@@ -179,7 +186,19 @@ const AddPosting: React.FC<AddPostingProps> = ({
             !loadingAnimation &&
             responseRef.current &&
             responseRef.current?.innerHTML !== "" && (
-              <div className="w-full">
+              <div className="w-full flex flex-col gap-y-2">
+                <div className="flex justify-end">
+                  <PrimaryButton
+                    onClick={handleViewDetail}
+                    size="sm"
+                    className="w-fit"
+                  >
+                    <div className="flex items-center gap-x-1">
+                      <FaEye className="w-3 h-3" />
+                      <span>View Detail</span>
+                    </div>
+                  </PrimaryButton>
+                </div>
                 <TextEditor
                   value={responseRef.current.innerHTML}
                   onSubmit={updateResponse}
